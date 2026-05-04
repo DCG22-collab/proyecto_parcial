@@ -145,7 +145,7 @@ with tab1:
 # ==========================================
 with tab2:
     st.subheader("Carga de Datos Masivos")
-    st.markdown("Sube tu archivo `instagram_usage_lifestyle.csv` para generar predicciones por lote.")
+    st.markdown("Sube tu archivo '.csv' para generar predicciones por lote.")
     
     archivo_subido = st.file_uploader("Sube el archivo CSV", type=["csv"])
 
