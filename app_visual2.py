@@ -37,23 +37,23 @@ def procesar_lote(df_input):
     if "time_on_feed_per_day" not in df.columns and "daily_active_minutes_instagram" in df.columns and "time_on_reels_per_day" in df.columns:
         df["time_on_feed_per_day"] = df["daily_active_minutes_instagram"] - df["time_on_reels_per_day"]
 
-    # 2. Calcular Generation
+    # Calcular Generation
     if "Generation" not in df.columns and "age" in df.columns:
         bins_edad  = [13, 26, 42, 58, 100]
         labels_gen = ["Gen Z", "Millennials", "Gen X", "Boomers"]
         df["Generation"] = pd.cut(df["age"], bins=bins_edad, labels=labels_gen, include_lowest=True)
 
-    # 3. One-Hot Encoding
+    # One-Hot Encoding
     datos_transformados = pd.get_dummies(df)
 
-    # 4. Predicción de estrés
+    # Predicción de estrés
     X_base = datos_transformados.reindex(columns=cols_base, fill_value=0)
     X_base[cols_num_base] = scaler_base.transform(X_base[cols_num_base])
     
     df["estres_pred"] = modelo_estres.predict(X_base)
     df["riesgo_pred"] = modelo_riesgo.predict(X_base)
 
-    # 5. Predicción de felicidad (Inferencia en Cascada)
+    # Predicción de felicidad (Inferencia en Cascada)
     X_happ = datos_transformados.reindex(columns=cols_happ, fill_value=0)
     X_happ["perceived_stress_score"] = df["estres_pred"]
     X_happ[cols_num_happ] = scaler_felicidad.transform(X_happ[cols_num_happ])
@@ -62,16 +62,15 @@ def procesar_lote(df_input):
 
     return df
 
-# --- INTERFAZ DE USUARIO ---
+# INTERFAZ DE USUARIO 
 st.title("📸 Analizador de Salud Mental - Instagram")
 st.markdown("Basado en el modelo de **Inferencia en Cascada** del proyecto.")
 
 # Crear las pestañas (Tabs)
 tab1, tab2 = st.tabs(["📝 Predicción Individual", "📁 Análisis Masivo (CSV)"])
 
-# ==========================================
+
 # TAB 1: PREDICCIÓN INDIVIDUAL
-# ==========================================
 with tab1:
     with st.form("perfil_usuario"):
         st.subheader("Información del Perfil")
@@ -140,9 +139,9 @@ with tab1:
         except Exception as e:
             st.error(f"Error al realizar la predicción: {e}")
 
-# ==========================================
+
 # TAB 2: ANÁLISIS MASIVO (CSV)
-# ==========================================
+
 with tab2:
     st.subheader("Carga de Datos Masivos")
     st.markdown("Sube tu archivo '.csv' para generar predicciones por lote.")
