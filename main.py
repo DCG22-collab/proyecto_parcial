@@ -36,7 +36,6 @@ try:
     cols_num_happ = list(scaler_felicidad.feature_names_in_)
 
     print("✅ Modelos y Scalers cargados correctamente.")
-    print(f"   cols_base     : {len(cols_base)} columnas")
     print(f"   cols_happ     : {len(cols_happ)} columnas")
     print(f"   cols_num_base : {cols_num_base}")
     print(f"   cols_num_happ : {cols_num_happ}")
