@@ -1,2 +1,5 @@
 streamlit
-requests
+joblib
+pandas
+scikit-learn==1.5.0
+numpy==2.0.0
