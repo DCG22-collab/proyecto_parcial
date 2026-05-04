@@ -59,7 +59,7 @@ if submit:
     
     try:
         # Nota: 'api' es el nombre del servicio si usas Docker Compose
-        response = requests.post("http://localhost:8000/predecir", json=payload)
+        response = requests.post("https://proyectoparcial-production.up.railway.app/predecir", json=payload)
         data = response.json()
         
         if data["status"] == "success":
