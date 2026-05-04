@@ -1,0 +1,7 @@
+EV_IA_Estable/
+venv/
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+instagram_usage_lifestyle.csv
